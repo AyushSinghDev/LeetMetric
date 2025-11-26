@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function(){
     const searchButton = document.getElementById("search-btn");
     const usernameInput = document.getElementById("user-input");
     const statsSection = document.getElementById("stats-section");
@@ -12,21 +12,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const mediumLabel = document.getElementById("medium-label");
     const hardLabel = document.getElementById("hard-label");
 
-    function validateUsername(username) {
-        if (username.trim() === "") {
+    function validateUsername(username){
+        if(username.trim() === "") {
             showError("Username should not be empty");
             return false;
         }
         const regex = /^[a-zA-Z0-9_-]{1,25}$/;
         const isMatching = regex.test(username);
-        if (!isMatching) {
+        if (!isMatching){
             showError("Invalid Username format");
         }
         return isMatching;
     }
 
-    async function fetchUserDetails(username) {
-        try {
+    async function fetchUserDetails(username){
+        try{
             searchButton.textContent = "Searching...";
             searchButton.disabled = true;
 
@@ -38,19 +38,19 @@ document.addEventListener("DOMContentLoaded", function () {
             const statsUrl = `https://leetcode-stats-api.herokuapp.com/${username}`;
             const contestUrl = `https://alfa-leetcode-api.onrender.com/${username}/contest`;
             
-            const [statsRes, contestRes] = await Promise.all([
+            const[statsRes,contestRes] = await Promise.all([
                 fetch(statsUrl),
                 fetch(contestUrl)
             ]);
 
-            if (!statsRes.ok) {
+            if(!statsRes.ok){
                 throw new Error("Unable to fetch user details");
             }
 
             const statsData = await statsRes.json();
             
             let contestData = null;
-            if(contestRes.ok) {
+            if(contestRes.ok){
                 contestData = await contestRes.json();
             }
 
@@ -60,25 +60,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             displayUserDetails(statsData, contestData);
 
-        } catch (error) {
+        }catch(error){
             showError(error.message);
-        } finally {
+        }finally{
             searchButton.textContent = "Search";
             searchButton.disabled = false;
         }
     }
 
-    function showError(message) {
+    function showError(message){
         errorMessage.textContent = message;
         statsSection.classList.add("hidden");
         extraInfo.classList.remove("hidden");
     }
 
-    function displayUserDetails(statsData, contestData) {
+    function displayUserDetails(statsData, contestData){
         errorMessage.textContent = "";
-        
         extraInfo.classList.add("hidden");
-        
         statsSection.classList.remove("hidden");
 
         const totalEasy = statsData.totalEasy;
@@ -106,10 +104,10 @@ document.addEventListener("DOMContentLoaded", function () {
                                 : 0;
 
         const cardsData = [
-            { label: "Total Solved", value: `${statsData.totalSolved} / ${statsData.totalQuestions}` },
-            { label: "Acceptance Rate", value: `${statsData.acceptanceRate}%` },
-            { label: "Ranking", value: statsData.ranking },
-            { label: "Contest Rating", value: contestRating }
+            {label: "Total Solved", value: `${statsData.totalSolved} / ${statsData.totalQuestions}`},
+            {label: "Acceptance Rate", value: `${statsData.acceptanceRate}%`},
+            {label: "Ranking", value: statsData.ranking},
+            {label: "Contest Rating", value: contestRating}
         ];
 
         cardStatsContainer.innerHTML = cardsData.map(card => `
@@ -120,11 +118,11 @@ document.addEventListener("DOMContentLoaded", function () {
         `).join("");
     }
 
-    function animateProgress(circleElement, targetPercentage, color) {
+    function animateProgress(circleElement, targetPercentage, color){
         let currentProgress = 0;
         const speed = 15;
         
-        if(circleElement.dataset.animationId) {
+        if(circleElement.dataset.animationId){
             clearInterval(circleElement.dataset.animationId);
         }
 
@@ -140,9 +138,9 @@ document.addEventListener("DOMContentLoaded", function () {
         circleElement.dataset.animationId = interval;
     }
 
-    searchButton.addEventListener('click', function () {
+    searchButton.addEventListener('click', function(){
         const username = usernameInput.value;
-        if (validateUsername(username)) {
+        if(validateUsername(username)){
             fetchUserDetails(username);
         }
     });
@@ -150,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
     usernameInput.addEventListener('keypress', function(e){
         if(e.key === 'Enter'){
             const username = usernameInput.value;
-            if (validateUsername(username)) {
+            if (validateUsername(username)){
                 fetchUserDetails(username);
             }
         }

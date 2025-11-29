@@ -36,7 +36,6 @@ git clone https://github.com/AyushSinghDev/LeetMetric.git
 cd LeetMetric
 # Open index.html in browser (Hit -> Go Live [Live Server extension])
 
-```text
 LeetMetric/
 ├── index.html
 ├── style.css   

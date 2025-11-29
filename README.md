@@ -1,6 +1,7 @@
 # LeetMetric 
 
-A modern, interactive web dashboard to visualize your LeetCode problem-solving statistics — total problems solved, difficulty distribution, progress over time, and more.  
+A modern, interactive web dashboard to visualize your LeetCode problem-solving statistics — total problems solved, difficulty distribution, progress over time, and more.
+
 Live Demo : [https://leet-metric-devxt.vercel.app/](https://leet-metric-devxt.vercel.app/)  
 
 ---
@@ -34,3 +35,9 @@ To run LeetMetric locally on your system:
 git clone https://github.com/AyushSinghDev/LeetMetric.git
 cd LeetMetric
 # Open index.html in browser (Hit -> Go Live [Live Server extension])
+
+```text
+LeetMetric/
+├── index.html
+├── style.css   
+└── script.js
